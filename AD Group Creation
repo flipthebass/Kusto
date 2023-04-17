@@ -1,0 +1,7 @@
+AzureActivity 
+| where Category == "Azure Active Directory" 
+| where ActivityNameValue == "Add group" 
+| where OperationNameValue == "Microsoft.DirectoryServices.Groups/create" 
+
+//This query retrieves all Azure Active Directory activities related to group creation. The Category column filters for Azure Active Directory activities, the ActivityNameValue column filters for the "Add group" activity, and the OperationNameValue column filters for the "Microsoft.DirectoryServices.Groups/create" operation, which is the operation used to create a new group in Azure AD.
+//You can modify this query to further filter the results based on your specific requirements, such as by subscription, resource group, or time range.
