@@ -1,0 +1,14 @@
+AzureActivity
+| where ActivityStatus == "Succeeded"
+| where OperationName == "Microsoft.Authorization/roleAssignments/write"
+| where ActivitySubmissionTimestamp > ago(1d)
+| where tostring(parse_json(Properties).roleDefinitionName) == "Owner" and 
+        tostring(parse_json(Properties).principalType) == "User"
+| project GroupName = tostring(split(parse_json(Properties).scope, '/')[-1]), 
+          UserName = tostring(parse_json(Properties).principalName),
+          SubscriptionId = tostring(parse_json(Properties).scope).split("/")[-2],
+          TimeGenerated
+
+//This rule looks for successful "roleAssignments/write" operations in the AzureActivity log. It then extracts the name of the role that was assigned (roleDefinitionName), the name of the user to whom the role was assigned (principalName), the ID of the subscription in which the role was assigned (scope), the name of the group in which the role was assigned, and the timestamp of the log entry. These fields are then displayed in the query output.
+//The additional where clauses filter the results to only show entries where the role assigned was "Owner" and the principal type is "User", indicating that a user was added as the owner of the group.
+//You can customize this query to suit your specific needs by modifying the where clauses or adding additional project clauses. You can also adjust the time window by changing the value of the ago() function.
