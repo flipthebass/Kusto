@@ -1,0 +1,25 @@
+Open the Azure Sentinel dashboard
+To write queries for Azure Sentinel, you need to first navigate to the Azure Sentinel dashboard in the Azure portal. You can do this by searching for "Sentinel" in the search bar at the top of the portal, or by navigating to the Sentinel service directly from the list of all services in Azure.
+
+Select a workspace
+Once you're in the Azure Sentinel dashboard, you need to select the workspace that you want to query. You can do this by clicking on the "Workspaces" tab in the left-hand menu and selecting the appropriate workspace.
+
+Click on "Logs"
+After you've selected your workspace, click on the "Logs" tab in the left-hand menu. This will take you to the Kusto query editor.
+
+Choose a query template
+Azure Sentinel provides a number of pre-built query templates that you can use to get started quickly. These templates cover a range of scenarios, from investigating security incidents to analyzing network traffic. To choose a template, click on the "Template Gallery" button at the top of the query editor and select the appropriate template.
+
+Customize the query
+Once you've selected a template, you can customize the query to fit your specific needs. This may involve modifying the time range, changing the columns that are included in the output, or adding filters to the query.
+
+Run the query
+Once you've customized the query, click the "Run" button to execute it. The results will be displayed in the query editor, and you can further refine the results by adding additional filters or modifying the query.
+
+Save the query
+If you want to save the query for future use, click the "Save" button at the top of the query editor and give the query a name. This will save the query to your Azure Sentinel workspace, where you can access it later and run it again.
+
+Visualize the data
+Finally, you can visualize the data returned by the query using the visualization tools in Azure Sentinel or by exporting the data to Power BI. This can help you gain insights into your data and identify patterns or trends that might not be immediately apparent from the raw query results.
+
+That's it! With these steps, you should be able to write Kusto queries for Azure Sentinel and analyze your security data with ease.
