@@ -1,0 +1,16 @@
+AuditLogs
+| where OperationName == "Add or remove role assignment" and 
+        Category == "RoleBasedAccessControl" and 
+        ActivityStatus == "Succeeded" and 
+        ActivitySubmissionTimestamp > ago(1d)
+| extend parsedParameters = parse_json(Parameters)
+| where tostring(parsedParameters.assignmentMethod) == "PrivilegedIdentityManagement" and 
+        tostring(parsedParameters.principalType) == "User"
+| project UserName = tostring(parsedParameters.principalId), 
+          RoleName = tostring(parsedParameters.roleDefinitionName), 
+          TimeGenerated
+
+//This rule looks for successful "Add or remove role assignment" operations in the AuditLogs table. It then extracts the assignment method (assignmentMethod) and the principal type (principalType) from the operation parameters (Parameters).
+//The additional where clauses filter the results to only show entries where the assignment method was "PrivilegedIdentityManagement" and the principal type is "User", indicating that a user used PIM to perform a privileged operation.
+//The project clause displays the name of the user who performed the operation (principalId), the name of the role that was assigned or removed (roleDefinitionName), and the timestamp of the log entry.
+//You can customize this query to suit your specific needs by modifying the where clauses or adding additional project clauses. You can also adjust the time window by changing the value of the ago() function.
